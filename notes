@@ -1,0 +1,98 @@
+
+
+ DO288 - OpenShift w.r.t Developers 
+ OpenShift (PaaS) 
+ 
+ 1) Developers develped the code/test cases. 
+ 2) Code will be placed/commit on SCM (ibm.github.com)  
+ 
+    https://github.com/ibm/app1 
+	https://github.com/ibm/app1/test-cases
+	
+  
+ 3) Platform (runtime environment)
+    
+	Registry --> image --> placed/set on the platform 
+   
+ 
+ 4) Application deployment  --> 
+    CI/CD 
+	
+	master node (OpenShift or kubernetes service running - containerized)
+	worker node (End user application deployment)
+	
+	
+	1) oc new-app --name app_name --docker-image https://image-url 
+	   or 
+	   oc new-app --name app_name <image_name>
+	   
+	   oc expose service service_name 
+	   oc get route 
+
+
+       Dockerfile or Docker/podman commit (Build new image) 
+       Dockerfile is most recommended one (Allowing to customized)
+
+       This deployment create certain resources (OpenShift or Kubernetes based resources).
+	   1) POD 
+	   2) Service (SVC)
+	   3) Deployment    (replica set or replication controller - Kubernetes resources)
+	   4) route
+       5) secret 
+       6) configMap 
+       7) PV  - OpenShift Admin 
+       8) PVC - initiated by developer (from POD) 	   
+       etc 
+
+      NOte: runtime environment + code/test-cases = Deployment (Image based deployment)
+	        runtime environment + code/test-cases = IMage 
+			IMage --> Registry (tag) - (podman/docker inspect image)
+
+
+	   
+	2) oc new-app --name app_name -i is_name https://github.com/ibm/app1 \
+	   --as-deployment-config 
+	   or 
+	   oc new-app --name app_name is_name~https://github.com/ibm/app1 \
+	   --as-deployment-config
+	   
+	   
+	   This deployment create certain resources (OpenShift or Kubernetes based resources).
+	   1) POD 
+	   2) service (SVC)
+	   3) deployment    (replica set or replication controller - Kubernetes resources)
+	   or 
+	   3) deploymentConfig (dc)
+       4) buildConfig (bc)	(git + registry)   
+	   5) route
+       6) secret 
+       7) configMap 
+       8) PV  - OpenShift Admin 
+       9) PVC - initiated by developer (from POD) 	   
+       etc 
+	   
+ 
+   oc new-app --name echo01 https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+   
+    oc new-app --name echo02 --as-deployment-config https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+	
+	
+	git repo 
+	git clone (develoment)
+	aap1 aap2 app3 
+	
+	git checkout master 
+	git checkout -b demo01 
+	git branch 
+	*demo01 
+	 master
+	 
+	1st deployment 
+	oc new-app --name echo02 --as-deployment-config https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir app3 
+	
+	
+	
+ 
+ 
+ 
+ 
