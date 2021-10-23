@@ -1,0 +1,306 @@
+    1  exit
+    2  exit
+    3  dig localhost
+    4  exit
+    5  exit
+    6  ifconfig
+    7  sudo vi /etc/hosts
+    8  exit
+    9  history
+   10  exit
+   11  ll
+   12  exit
+   13  lab-configure 
+   14  ls -l /usr/local/etc/ocp4.config 
+   15  source /usr/local/etc/ocp4.config
+   16  cat /usr/local/etc/ocp4.config
+   17  oc login -u $RHT_OCP4_DEV_USER -p ${RHT_OCP4_DEV_PASSWORD} $RHT_OCP4_MASTER_API
+   18  oc whoami 
+   19  oc whoami -t 
+   20  oc whoami 
+   21  oc project -q 
+   22  oc new-app --name app1 httpd 
+   23  oc new-project demo01 
+   24  oc new-project do288-demo01 
+   25  oc project -q 
+   26  #oc new-app --name app1 httpd 
+   27  podman search httpd
+   28  oc new-app --name app1 httpd 
+   29  oc get pods
+   30  oc all 
+   31  oc get all 
+   32  oc whoami 
+   33  podman search httpd |less
+   34  oc get is -n openshift |less
+   35  oc get is 
+   36  cat /usr/local/etc/ocp4.config 
+   37  oc get is -n openshift |less
+   38  oc get all
+   39  oc new-project p1 
+   40  oc new-project p11
+   41  oc project -q
+   42  oc get all
+   43  oc new-app --name p11 --docker-image recovery.quay.io/cprakash2118/java-unzip-httpd-image
+   44  oc new-app --name p11 --docker-image quay.io/cprakash2118/java-unzip-httpd-image
+   45  oc get pods
+   46  ic get is
+   47  oc get is
+   48  oc edit is default-route-openshift-image-registry.apps.ap46.prod.nextcle.com/p11/p11
+   49  oc get is p11 -o yaml > p11.yaml 
+   50  vim p11.yaml 
+   51  oc get pods
+   52  oc logs p11-85584cd6bb-cd4c5
+   53  oc project do288-demo01 
+   54  oc get pods
+   55  oc get is 
+   56  oc edit app1 
+   57  oc edit is app1 
+   58  nslookup image-registry.openshift-image-registry.svc
+   59  oc project p11
+   60  oc get pods
+   61  oc get is
+   62  oc edit is p11
+   63  oc project do288-demo01 
+   64  oc get all
+   65  history | grep new-app 
+   66  oc new-app --name app2 --as-deployment-config httpd
+   67  oc get  pods
+   68  oc get  pods -w
+   69  oc get pos
+   70  oc get pods
+   71  oc get dc 
+   72  oc get deployment
+   73  oc logs dc/app2-1-deploy
+   74  oc logs dc/app2 |less
+   75  oc logs app2-1-deploy |less
+   76  oc logs app2-1-deploy 
+   77  oc scale --replicas=2 dc/app2  
+   78  oc get pods
+   79  oc edit dc/app2 
+   80  ls -lrth 
+   81  git clone https://github.com/cprakash2118/DO288-apps
+   82  ls -lrth 
+   83  cd DO288-apps/
+   84  pwd
+   85  ls
+   86  cd ubi-echo
+   87  pwd
+   88  ll
+   89  vim Dockerfile 
+   90  cd ..
+   91  git branch
+   92  git checkout -b demo01
+   93  git branch
+   94  git push -u origin demo01 
+   95  pwd
+   96  history | grep git 
+   97  git branch
+   98  vim ubi-echo/Dockerfile 
+   99  ls
+  100   oc new-app --name echo01 https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+  101  oc get pods -w 
+  102  oc get pods
+  103* 
+  104  oc get pods -w 
+  105  oc get pods | grep echo 
+  106   oc new-app --name echo02 --as-deployment-config  https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+  107  oc get pods
+  108  oc logs echo02-1-gkxvg
+  109  git status 
+  110  # oc new-app --name echo02 --as-deployment-config  https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+  111  # oc new-app --name echo01 https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+  112  oc logs echo02-1-build 
+  113  oc logs echo02-1-build > f1.txt
+  114  vim f1.txt 
+  115  oc logs echo02-1-deploy > f2.txt
+  116  vim f2.txt 
+  117  vim ubi-echo/Dockerfile 
+  118  git status 
+  119  mv f1.txt /tmp/
+  120  mv f2.txt /tmp/
+  121  git status 
+  122  oc get pods
+  123  oc logs echo02-1-gkxvg 
+  124  oc get pods
+  125  git commit -m "ubi-echo-Dockerfile updated"
+  126  git add ubi-echo/Dockerfile 
+  127  git status 
+  128  git commit -m "ubi-echo-Dockerfile updated"
+  129  git push 
+  130  oc get pods
+  131  oc logs echo02-1-gkxvg | head -4 
+  132  oc logs echo02-1-gkxvg | tail -4 
+  133  oc start-build echo02  
+  134  oc get pods
+  135  oc logs echo02-2-n4tlg | tail -4 
+  136  oc get  pods
+  137  history | grep new-app 
+  138  oc get pods
+  139  oc logs echo02-2-n4tlg | tail -4 
+  140  oc start-build --help |less
+  141  #oc start-build --from-build=hello-world-1
+  142  oc start-build --from-build=echo02-1
+  143  oc get pods
+  144  oc logs echo02-3-dvrnd | tail -4 
+  145  oc start-build --from-build=echo02-2
+  146  oc get pods
+  147  oc get bc 
+  148  # oc new-app --name echo01 https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#demo01 --context-dir ubi-echo
+  149  cd ubi-echo/
+  150  pwd
+  151  ll
+  152  vim Dockerfile 
+  153  git status 
+  154  git add Dockerfile 
+  155  git status 
+  156  git commit -m "test-deleting all" 
+  157  git push 
+  158  oc get pods
+  159  oc logs echo02-4-95mn9 |head -1 
+  160  mv Dockerfile Dockerfile1
+  161  ll
+  162  git status 
+  163  git add .
+  164  git status 
+  165  git commit -m "test02"
+  166  git push 
+  167  ll
+  168  cd
+  169  oc get  pods
+  170  oc start-build echo02 
+  171  oc get  pods
+  172  oc logs bc/echo02 
+  173  oc edit bc echo02 
+  174  git branch
+  175  cd DO288-apps/
+  176  git branch
+  177  git checkout -b demo02 
+  178  oc get pods
+  179  git push -u origin demo02 
+  180  oc get pods
+  181  oc get bc
+  182  oc get pods
+  183  #oc start-build echo02 
+  184  cd ubi-echo/
+  185  ls
+  186  git branch
+  187  git checkout master 
+  188  git branch 
+  189  cd ..
+  190  ls
+  191  git branch
+  192  git checkout master 
+  193  git checkout -b demo03 
+  194  git branch
+  195  git push -u origin demo03 
+  196  oc get  pods
+  197  oc edit bc echo02
+  198  oc get  pods
+  199  oc start-build echo02 
+  200  oc get  pods
+  201  git branch
+  202  oc get bc
+  203  history 
+  204  oc get pods
+  205  oc edit bc echo02 
+  206  oc whoami 
+  207  oc login -u $RHT_OCP4_DEV_USER -p ${RHT_OCP4_DEV_PASSWORD} $RHT_OCP4_MASTER_API
+  208  oc whoami 
+  209  oc login -u $RHT_OCP4_DEV_USER -p ${RHT_OCP4_DEV_PASSWORD} $RHT_OCP4_MASTER_API
+  210  source /usr/local/etc/ocp4.config 
+  211  oc login -u $RHT_OCP4_DEV_USER -p ${RHT_OCP4_DEV_PASSWORD} $RHT_OCP4_MASTER_API
+  212  oc get pods
+  213  oc edit bc echo02
+  214  oc get  pods
+  215  oc get  pods | grep echo02 | grep build 
+  216  oc edit bc echo02
+  217  oc get  pods | grep echo02 | grep build 
+  218  oc start-build echo02 
+  219  oc get  pods | grep echo02 | grep build 
+  220  oc edit bc echo02
+  221  oc get  pods | grep echo02 | grep build 
+  222  oc edit bc echo02
+  223  oc get  pods | grep echo02 | grep build 
+  224  oc edit bc echo02
+  225  pwd
+  226  ll
+  227  ls
+  228  cd
+  229  pwd
+  230  lab-configure 
+  231  source /usr/local/etc/ocp4.config 
+  232  lab docker-build start
+  233  cd  DO288-apps/
+  234  ls
+  235  git checkout master 
+  236  git checkout -b item01
+  237  git branch
+  238  git push -u origin item01 
+  239  oc whoami 
+  240  oc new-project priject_demo01 
+  241  oc new-project prijectdemo01 
+  242  oc project -q 
+  243  oc new-app --name echo https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps#docker-build--context-dir ubi-echo
+  244  cd
+  245  lab build-template starta 
+  246  lab build-template start 
+  247  cd DO288-apps/
+  248  owd
+  249  ls
+  250  git checkout master 
+  251  cat quotes/git.php
+  252  cat quotes/get.php 
+  253  cd quotes/
+  254  ls
+  255  cat get.php |less
+  256  pwd
+  257  ls
+  258  cd ~/DO288
+  259  cd
+  260  cd DO288
+  261  ls
+  262  cd labs/
+  263  ls
+  264  cd build-template/
+  265  ls
+  266  vim php-mysql-ephemeral.json 
+  267  cat php-mysql-ephemeral.json | grep "kind"
+  268  oc get  template -n openshift
+  269  oc get  template -n openshift | grep php
+  270  ls
+  271  oc new-project ${RHT_OCP4_DEV_USER}-common
+  272  oc project -q
+  273  oc create -f  php-mysql-ephemeral.json 
+  274  oc new-project 
+  275  oc new-project ${RHT_OCP4_DEV_USER}-build-template
+  276  ll
+  277  vim create-app.sh 
+  278  ll
+  279  cat php-mysql-ephemeral.json | grep kind 
+  280  ll
+  281  pwd
+  282  vim create-app.sh 
+  283  vim php-mysql-ephemeral.json 
+  284  oc get  pods
+  285  history | grep new-project 
+  286  oc project ${RHT_OCP4_DEV_USER}-common
+  287  oc get  pods
+  288  ll
+  289  ./create-app.sh 
+  290  oc get  pods
+  291  oc logs quotesapi-54b5c89fbc-6rvqh
+  292  oc get is 
+  293  oc get  bc 
+  294  oc logs bc/quotesapi
+  295  oc get  pods
+  296  oc get  route 
+  297  curl -si quote-qigjpp.apps.ap46.prod.nextcle.com
+  298  vim create-app.sh 
+  299  cd
+  300  history 
+  301  git clone https://github.com/cprakash2118/do288-history-files
+  302  cd do288-history-files/
+  303  pwd
+  304  ll
+  305  touch notes
+  306  history > history.txt
