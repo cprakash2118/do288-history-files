@@ -1,0 +1,200 @@
+    1  mkdir work 
+    2  cd work/
+    3  pwd
+    4  ll
+    5  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+    6  oc whoami 
+    7  oc get users
+    8  oc login -u developer -p developer 
+    9  cd
+   10  cat .kube/config 
+   11  oc logout 
+   12  oc whoami 
+   13  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+   14  oc whoami 
+   15  oc whoami -t 
+   16  oc whoami --show-console 
+   17  oc whoami 
+   18  ll
+   19  cd work/
+   20  pwd
+   21  ll
+   22  file-name=devops-file
+   23  file_name=devops-file
+   24  for x in {1..5}; do if [ -f $file_name ]; then htpasswd -B -b $file_name user$x redhat; else htpasswd -c -B -b $file_name user$x redhat; fi; done
+   25  cat devops-file 
+   26  file_name=sre-file
+   27  for x in {6..10}; do if [ -f $file_name ]; then htpasswd -B -b $file_name user$x redhat; else htpasswd -c -B -b $file_name user$x redhat; fi; done
+   28  ll
+   29  cat sre-file 
+   30  cat devops-file 
+   31  file_name=app01-file 
+   32  for x in {11..20}; do if [ -f $file_name ]; then htpasswd -B -b $file_name user$x redhat; else htpasswd -c -B -b $file_name user$x redhat; fi; done
+   33  ll
+   34  cat app01-file 
+   35  oc create secret generic devops-secret --from-file htpasswd=devops-file -n openshift-config 
+   36  oc create secret generic sre-secret --from-file htpasswd=sre-file -n openshift-config 
+   37  oc create secret generic app01-secret --from-file htpasswd=app01-file -n openshift-config 
+   38  oc get secret -n openshift-config | grep -secret 
+   39  oc get secret -n openshift-config | grep -E 'sre|devops|app01'
+   40  oc get oauth/cluster -o yaml > oauth.yaml 
+   41  vim oauth.yaml 
+   42  oc replace -f oauth.yaml 
+   43  oc get pods -n openshift-authentication 
+   44  for x in {1..20}; do oc login -u user$x -p redhat; done
+   45  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+   46  oc get users 
+   47  oc get users  |grep sre
+   48  oc get users  |grep devops
+   49  oc get users  |grep app01
+   50  oc version 
+   51  oc get nodes
+   52  oc debug node/master01 
+   53  cat /etc/redhat-release 
+   54  oc debug node/master01 
+   55  oc get pods -n openshift-authentication 
+   56  oc get pods -n openshift-authentication-operator 
+   57  oc get pods -n openshift-apiserver-check-endpoints
+   58  oc new-project demo01 
+   59  oc project -q
+   60  oc new-app --name test01 quay.io/cprakash2118/april-java-unzip-httpd-image-02
+   61  oc get pods
+   62  oc logs test01-68bbf8d5f7-ssbck
+   63  oc get pods
+   64  oc logs test01-68bbf8d5f7-ssbck
+   65  oc create serviceaccount app-sa
+   66  oc adm policy add-scc-to-user anyuid -z app-sa 
+   67  oc set serviceaccount deployment test01 app-sa 
+   68  oc get pods
+   69  oc rsh test01-55c59749cc-jt6dn 
+   70  exit
+   71  oc whoami 
+   72  oc get users
+   73  cd h
+   74  cd work/
+   75  ll
+   76  vim oauth.yaml 
+   77  ll
+   78  oc extract secret/ldap-secret --to=. -n openshift-config 
+   79  cat bindPassword 
+   80  ll
+   81  cat bindPassword 
+   82  oc login -u cp -p redhat123
+   83  oc whoami 
+   84  ll
+   85  vim oauth.yaml 
+   86  ll
+   87  oc extract cm/ca-config-map --to=. -n openshift-config 
+   88  oc get cm -n openshift-config 
+   89  oc whoami 
+   90  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+   91  oc extract cm/ca-config-map --to=. -n openshift-config 
+   92  ll
+   93  cat ca.crt 
+   94  oc whoami 
+   95  history 
+   96  history | grep for 
+   97  git clone https://github.com/cprakash2118/do280-Dec22
+   98  ll
+   99  history > do280-Dec22/history-09-Feb24.txt
+  100  cd do280-Dec22/
+  101  git status 
+  102  git add .
+  103  git status 
+  104  git commit -m "update"
+  105  git push 
+  106  ll
+  107  cd ..
+  108  ll
+  109  cat app01-file 
+  110  mkdir work 
+  111  cd work/
+  112  pwd
+  113  ll
+  114  cd ..
+  115  mv work old.work
+  116  mkdir work 
+  117  cd work/
+  118  pwd
+  119  ll
+  120  oc login -u admin -pn redhatocp https://api.ocp4.example.com:6443
+  121  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+  122  oc whoami 
+  123  oc get nodes
+  124  oc version 
+  125  oc get clusterversion 
+  126  oc get co
+  127  oc get users
+  128  pwd
+  129  oc get secret -n openshift-config 
+  130  oc extract secret/sre-secret --to=. -n openshift-config 
+  131  ll
+  132  cat htpasswd 
+  133  #oc extract secret/sre-secret --to=. -n openshift-config 
+  134  oc get secret -n openshift-config | grep app
+  135  oc extract secret/app01-secret --to=. -n openshift-config 
+  136  oc extract secret/app01-secret --to=. -n openshift-config --confirm
+  137  ll
+  138  cat htpasswd 
+  139  oc get users | grep sre 
+  140  oc get users | grep app01 
+  141  #htpasswd -D user20 
+  142  ll
+  143  cat htpasswd 
+  144  htpasswd -D user20 htpasswd
+  145  htpasswd
+  146  cat htpasswd 
+  147  htpasswd -D user20 htpasswd
+  148  ll
+  149  mv htpasswd htpasswd-file
+  150  htpasswd -D user20 htpasswd-file
+  151  htpasswd htpasswd-file -D user20
+  152  htpasswd -D  htpasswd-file user20 
+  153  ll
+  154  oc extract secret/sre-secret --to=. -n openshift-config --confirm
+  155  cat htpasswd
+  156  htpasswd -b -B htpasswd user20 red
+  157  cat htpasswd
+  158  cat htpasswd-file | tail -4
+  159  oc set data --help |less
+  160  #oc set data secret/foo password=this_is_secret
+  161  #oc set data secret/sre-secret
+  162  oc get secret -n openshift-config | grep app
+  163  oc get secret -n openshift-config 
+  164  oc set data secret/sre-secret -n openshift-config 
+  165  oc set data secret/sre-secret --from-file htpasswd=htpasswd -n openshift-config 
+  166  oc set data secret/app01-secret --from-file htpasswd=htpasswd-file -n openshift-config 
+  167  cat htpasswd
+  168  cat htpasswd-file | tail -4
+  169  oc get pods -n openshift-authentication 
+  170  vim -O htpasswd htpasswd-file 
+  171  oc login -u user20 -p redhat 
+  172  oc login -u user19 -p redhat 
+  173  history | grep htpasswd
+  174  oc login -u user20 -p red
+  175  oc login -u user19 -p redhat 
+  176  oc login -u user20 -p red
+  177  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+  178  oc get users
+  179  oc get users | grep user20
+  180  oc delete user user20
+  181  oc get users | grep user20
+  182  oc get identity | grep user20
+  183  oc delete identities app01_team-identity:user20
+  184  oc login -u user20 -p red
+  185  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+  186  oc get users | grep user20
+  187  oc delete user user20 
+  188  oc get users | grep user20
+  189  oc login -u user20 -p red
+  190  oc get identity | grep user20
+  191  oc delete identities.user.openshift.io sre_team-identity:user20
+  192  oc get identity | grep user20
+  193  oc login -u user20 -p red
+  194  oc get groups
+  195  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+  196  oc get groups
+  197  history 
+  198  git clone https://github.com/cprakash2118/do288-history-files
+  199  ll
+  200  history > do288-history-files/history-12Feb24-session-01-h1.txt 
